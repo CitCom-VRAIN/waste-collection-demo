@@ -10,12 +10,16 @@ class BrokerLD:
     def get_all_entities_by_type(
         self, type, service, subservice, token, limit=20, offset=0
     ):
-        protocol = os.environ.get("PROTOCOL")
+        protocol = "http" #os.environ.get("PROTOCOL")
         endpoint_cb = os.environ.get("ENDPOINT_CB")
 
-        url = "http://localhost:3000/ngsi-ld/v1/entities?type={TYPE}&scopeQ={SUBSERVICE}".format(
+        url = "{PROTOCOL}://{ENDPOINT_CB}/ngsi-ld/v1/entities?type={TYPE}&scopeQ={SUBSERVICE}&limit={LIMIT}&offset={OFFSET}&options=count".format(
+            PROTOCOL=protocol,
+            ENDPOINT_CB=endpoint_cb,
             TYPE=type,
             SUBSERVICE=subservice,
+            LIMIT=limit,
+            OFFSET=offset,
         )
 
         payload = {}
