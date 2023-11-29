@@ -151,5 +151,4 @@ def get_districts():
     districtsURL = os.environ.get("DISTRICTS_API")
     response = requests.get(districtsURL)
     districts = response.json()['results']
-    print(districts)
     return districts
