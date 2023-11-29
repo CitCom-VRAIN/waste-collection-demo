@@ -1,0 +1,21 @@
+html,
+body {
+    overflow: hidden;
+}
+
+.column {
+    height: 100vh;
+}
+
+.columns {
+    margin: 0
+}
+
+.modal {
+    z-index: 9999;
+}
+
+select,
+option {
+    text-transform: capitalize;
+}
