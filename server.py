@@ -2,8 +2,9 @@ import os
 from dotenv import load_dotenv
 from services.Auth import Auth
 from services.BrokerLD import BrokerLD
-from shapely.geometry import Point, Polygon
+from services.Optimization import Optimization
 import requests
+import json
 
 # Load env variables
 load_dotenv()
@@ -14,6 +15,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+
 
 # Serve frontend
 @app.route("/")
@@ -40,6 +42,15 @@ def trucks():
 def disctricts():
     districts = get_districts()
     return districts
+
+
+@app.route("/optimization")
+def optimization():
+    coords = request.args.get("coords")
+    print(json.loads(coords))
+    optimizer = Optimization()
+    optimization = optimizer.optimize(json.loads(coords))
+    return "optimization"
 
 
 # Data functions
@@ -150,5 +161,5 @@ def get_WasteContainers_within_area(polygon):
 def get_districts():
     districtsURL = os.environ.get("DISTRICTS_API")
     response = requests.get(districtsURL)
-    districts = response.json()['results']
+    districts = response.json()["results"]
     return districts
