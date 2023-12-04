@@ -39,3 +39,8 @@ option {
     height: auto;
     margin-bottom: 25px;
 }
+
+input,
+select {
+    width: 100% !important;
+}
