@@ -1,5 +1,8 @@
 html,
 body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 
@@ -18,4 +21,21 @@ body {
 select,
 option {
     text-transform: capitalize;
+}
+
+.loading-column {
+    justify-content: center;
+}
+
+.is-vcentered-custom {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.logo {
+    height: auto;
+    margin-bottom: 25px;
 }
