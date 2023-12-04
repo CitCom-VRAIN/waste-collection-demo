@@ -1,5 +1,5 @@
-# Waste management route optimization
-A for waste management optimization using the Openroute service.
+# Waste Collection Demo
+Waste collection optimization using Openroute service.
 
 ## 📦 Project setup
 Tested with Python `3.10.12` and Ubuntu 22.04.  
