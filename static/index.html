@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waste management route optimization</title>
+    <title>CitCom.ai | Waste Collection Demo</title>
     <!-- Bulma-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <!-- Leaflet-->
@@ -22,9 +22,8 @@
     <!-- Custom style -->
     <link rel="stylesheet" href="/static/style.css">
     <!-- JS script -->
-    <script src="/static/map.js"></script>
     <script src="/static/ui.js"></script>
-    <script src="/static/httpclient.js"></script>
+    <script type="module" src="/static/main.js"></script>
 </head>
 
 <body>
@@ -34,7 +33,7 @@
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Vehicle settings</p>
-                <button onclick="closeVehicleSettings()" class="delete" aria-label="close"></button>
+                <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
                 <!-- Modal content -->
@@ -67,17 +66,22 @@
                 </div>
             </section>
             <footer class="modal-card-foot">
-                <button onclick="closeVehicleSettings()" class="button is-success">Save changes</button>
-                <button onclick="closeVehicleSettings()" class="button">Cancel</button>
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
             </footer>
         </div>
     </div>
 
     <!-- Loading overlay -->
     <div id="loading" class="columns is-mobile is-centered">
-        <div class="column is-half has-text-centered">
-            <button id="loading-animation" style="border: none;" class="button is-large is-loading">Loading</button>
-            <p id="status-message">Loading data ...</p>
+        <div class="column is-flex is-half has-text-centered loading-column">
+            <div class="is-vcentered-custom">
+                <figure class="image logo">
+                    <img src="https://citcom.ai/assets/static/logo.svg" alt="">
+                </figure>
+                <h5 class="subtitle is-5">Waste Collection Demo</h5>
+                <button id="loading-animation" style="border: none;" class="button is-large is-loading">Loading</button>
+            </div>
         </div>
     </div>
     <!-- Dashboard -->
@@ -103,9 +107,9 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">Filling level (%)</label>
+                <label class="label">Filling level threshold (%)</label>
                 <div class="control has-icons-left">
-                    <input class="input" type="number" placeholder="50">
+                    <input id="filling-level" class="input" type="number" placeholder="50" value="0">
                     <span class="icon is-small is-left">
                         <i class="fas fa-dumpster"></i>
                     </span>
@@ -125,82 +129,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        (async function main() {
-            // Fetch data
-            const wasteContainers = await get('wastecontainers');
-            const trucks = await get('trucks');
-            const districts = await get('districts')
-
-
-            // On error, finish loading with error and terminate app
-            const error = wasteContainers.error || trucks.error || districts.error
-            if (error) {
-                finishLoading(error)
-                return;
-            }
-            finishLoading()
-
-            // Fill select with districts
-            fillDistrictsSelector("districts-select", districts)
-
-            // Init Leaflet map
-            map = createMap();
-
-            // Print markers on map
-            addMarkers(map, 'dumpster', 'blue', wasteContainers, false, true)
-            addMarkers(map, 'truck', 'green', trucks, true, false, (vehicle) => {
-                openVehicleSettings(vehicle)
-            })
-
-            // On district change
-            document.getElementById("districts-select").addEventListener("change", (event) => {
-
-                // Get target district
-                const districtID = event.target.value
-
-                if (districtID !== "all") {
-                    // Find district polygon 
-                    const target_district = districts.find(x => x.nombre === districtID)
-                    const districtPolygon = target_district.geo_shape.geometry.coordinates[0]
-
-                    // Reverse coords to fit leaflet coords system
-                    districtPolygon.forEach(coords => {
-                        coords = coords.reverse()
-                    });
-
-                    // Add leaflet polygon
-                    let polygon = L.polygon(districtPolygon, { color: 'red' }).addTo(map)
-
-                    // Pan to district center
-                    map.panTo(target_district.geo_point_2d, {})
-
-                    //filterWasteContainers(districtPolygon, 0.5, wasteContainers)
-                }
-
-
-            })
-
-
-        }());
-
-        function filterWasteContainers(targetArea, fillingLevel, wasteContainers) {
-            // Get target district
-            const target_district = districts.find(x => x.nombre === districtID)
-            const districtPolygon = target_district.geo_shape.geometry.coordinates[0]
-
-
-
-            // wasteContainers.forEach(container => {
-            //     if (container.location) {
-            //         const containerLocation = container.location.value.coordinates
-            //         console.log(containerLocation, districtPolygon)
-            //     }
-
-            // });
-        }
-    </script>
 </body>
 
 </html>
