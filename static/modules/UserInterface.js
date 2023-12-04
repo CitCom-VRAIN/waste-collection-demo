@@ -33,3 +33,5 @@ function openVehicleSettings(vehicle) {
 function closeVehicleSettings() {
     document.getElementById('vehicle-settings').classList.remove("is-active");
 }
+
+export { initLoading, finishLoading, fillDistrictsSelector }
