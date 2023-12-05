@@ -1,7 +1,7 @@
 import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
-import { fillingLevel, district } from './modules/UserInterface.js'
+import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
 
 (async function main() {
     // Init data manager
@@ -27,7 +27,7 @@ import { fillingLevel, district } from './modules/UserInterface.js'
     document.querySelector('#filling-level').addEventListener('keyup', () => {
         // Delay to let user end
         setTimeout(() => {
-            updateMarkers(map, dataManager);
+            updateMarkers(map, dataManager)
         }, 500)
     });
 
@@ -44,19 +44,21 @@ import { fillingLevel, district } from './modules/UserInterface.js'
         }
 
         updateMarkers(map, dataManager)
-
     })
 }());
 
 function updateMarkers(map, dataManager) {
+    console.log(map.layers.containers)
+
     // Filter
-    const filteredWasteContainers = dataManager.filter(fillingLevel(), district())
+    const filteredWasteContainers = dataManager.filter(fillingLevelValue(), districtValue())
 
     // Clear
     map.layers.containers.clearLayers()
 
-    // Add
+    // Add (x2 dirty fix, strange problem with leaflet)
     filteredWasteContainers.forEach(container => {
+        container.marker.addTo(map.layers.containers);
         container.marker.addTo(map.layers.containers);
     });
 }
