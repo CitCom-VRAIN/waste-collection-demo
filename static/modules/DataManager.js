@@ -2,22 +2,27 @@ import { HttpClient } from './HttpClient.js';
 import { finishLoading, fillDistrictsSelector } from './UserInterface.js';
 import { WasteContainer } from './WasteContainer.js';
 import { Vehicle } from './Vehicle.js';
+import { District } from './District.js'
+import turf from 'https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/+esm'
 
 export class DataManager {
 
-    wasteContainers = []
-    vehicles = []
+    wasteContainers = [];
+    vehicles = [];
+    districts = [];
 
     constructor() {
         this.httpClient = new HttpClient();
     }
 
     async fetchData() {
+        // Fetch data
         let wasteContainersData = await this.httpClient.get('wastecontainers');
-        const vehicles = await this.httpClient.get('trucks');
-        this.districts = await this.httpClient.get('districts');
+        const vehiclesData = await this.httpClient.get('trucks');
+        const districtsData = await this.httpClient.get('districts');
 
-        const error = wasteContainersData.error || this.vehicles.error || this.districts.error;
+        // Check network error
+        const error = wasteContainersData.error || vehiclesData.error || districtsData.error;
 
         if (error) {
             finishLoading(error)
@@ -34,11 +39,28 @@ export class DataManager {
         });
 
         // Create Vehicle objects
-        vehicles.forEach(vehicle => {
+        vehiclesData.forEach(vehicle => {
             this.vehicles.push(new Vehicle(vehicle.id, vehicle.location, vehicle.brandName, vehicle.fuelType, vehicle.cargoVolume))
         });
 
+        // Create District objects
+        districtsData.forEach(district => {
+            this.districts.push(new District(district.nombre, district.nombre, district.geo_shape.geometry.coordinates[0], district.geo_point_2d))
+        });
+
         // Fill select with districts
-        fillDistrictsSelector("districts-select", this.districts)
+        fillDistrictsSelector(this.districts)
+    }
+
+    filter(fillingLevel, district) {
+        district = this.districts.find(x => x.nombre === district)
+
+        // Copy original
+        let filteredWasteContainers = this.wasteContainers;
+
+        // Filter by filling level filter
+        filteredWasteContainers = this.wasteContainers.filter(container => container.fillingLevel.value >= fillingLevel / 100);
+
+        return filteredWasteContainers;
     }
 }
