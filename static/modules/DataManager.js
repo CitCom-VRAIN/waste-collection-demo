@@ -3,7 +3,7 @@ import { finishLoading, fillDistrictsSelector } from './UserInterface.js';
 import { WasteContainer } from './WasteContainer.js';
 import { Vehicle } from './Vehicle.js';
 import { District } from './District.js'
-import turf from 'https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/+esm'
+//import turf from 'https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/+esm'
 
 export class DataManager {
 
@@ -52,8 +52,8 @@ export class DataManager {
         fillDistrictsSelector(this.districts)
     }
 
-    filter(fillingLevel, district) {
-        district = this.districts.find(x => x.nombre === district)
+    filter(fillingLevel, districtID) {
+        const district = this.districts.find(district => district.id === districtID)
 
         // Copy original
         let filteredWasteContainers = this.wasteContainers;
@@ -61,6 +61,25 @@ export class DataManager {
         // Filter by filling level filter
         filteredWasteContainers = this.wasteContainers.filter(container => container.fillingLevel.value >= fillingLevel / 100);
 
+        //
+        let newFilter = [];
+        if (district) {
+            // Filter by district
+            let districtPolygon = turf.polygon([district.coordinates])
+
+            for (let i = 0; i < filteredWasteContainers.length; i++) {
+
+                let wasteContainerLocation = filteredWasteContainers[i].location.value.coordinates;
+
+                let point = turf.point(wasteContainerLocation);
+                let contains = turf.booleanPointInPolygon(point, districtPolygon);
+
+                if (contains) {
+                    newFilter.push(filteredWasteContainers[i])
+                }
+            }
+            return newFilter;
+        }
         return filteredWasteContainers;
     }
 }
