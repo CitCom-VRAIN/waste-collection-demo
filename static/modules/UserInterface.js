@@ -9,16 +9,18 @@ function finishLoading(error) {
     if (error) {
         document.getElementById("loading").classList.remove("is-hidden")
         document.getElementById("dashboard").classList.add("is-hidden")
-        document.getElementById('status-message').innerHTML = `Error fetching data: ${error}. <br> Please, reload the page to try again.`;
+
+        document.getElementById("error").classList.remove("is-hidden")
+        document.getElementById('status-message').innerHTML = `Network error. Please, reload the page to try again.`;
     } else {
         document.getElementById("loading").classList.add("is-hidden")
         document.getElementById("dashboard").classList.remove("is-hidden")
     }
 }
 
-function fillDistrictsSelector(id, districts) {
+function fillDistrictsSelector(districts) {
     districts.forEach(district => {
-        document.getElementById(id).innerHTML += `<option value="${district.nombre}">${district.nombre.toLowerCase()}</option>`
+        document.getElementById('districts-select').innerHTML += `<option value="${district.name}">${district.name.toLowerCase()}</option>`
     });
     document.getElementById('districts-select-div').classList.remove('is-loading')
 }
