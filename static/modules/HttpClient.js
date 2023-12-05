@@ -8,6 +8,7 @@ export class HttpClient {
             const data = JSON.parse(response);
             return data;
         } catch (error) {
+            console.error(error)
             return { error: error };
         }
     }
