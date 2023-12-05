@@ -34,4 +34,12 @@ function closeVehicleSettings() {
     document.getElementById('vehicle-settings').classList.remove("is-active");
 }
 
-export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings }
+function fillingLevel() {
+    return parseInt(document.querySelector("#filling-level").value) || 0;
+}
+
+function district() {
+    return document.querySelector("#districts-select").value || 'all';
+}
+
+export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, fillingLevel, district }
