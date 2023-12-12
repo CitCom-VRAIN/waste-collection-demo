@@ -46,11 +46,10 @@ def disctricts():
 
 @app.route("/optimization")
 def optimization():
-    coords = request.args.get("coords")
-    print(json.loads(coords))
+    coords = json.loads(request.args.get("coords"))
     optimizer = Optimization()
-    optimization = optimizer.optimize(json.loads(coords))
-    return "optimization"
+    optimization = optimizer.optimize(coords)
+    return optimization
 
 
 # Data functions

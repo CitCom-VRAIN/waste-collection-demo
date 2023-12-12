@@ -4,16 +4,11 @@ from shapely.geometry import Point
 
 
 class Optimization:
-    def optimize(self, coords):
-        # coords = []
+    def optimize(self, locations):
+        coords = []
 
-        # for container in data:
-        #     # Discard containers with null location values
-        #     if "location" in container and container["location"]["value"] is not None:
-        #         # Create point from container location
-        #         #point = Point(container["location"]["value"]["coordinates"])
-        #         # Check if the container is within target polygon
-        #         coords.append(container["location"]["value"]["coordinates"])
+        for coord in locations:
+            coords.append([coord["lng"], coord["lat"]])
 
         # Openroute service API key
         client = ors.Client(key=os.environ.get("OPENROUTESERVICE_API_KEY"))
