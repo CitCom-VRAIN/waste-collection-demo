@@ -3,7 +3,8 @@ export class LeafletMap {
     layers = {
         containers: null,
         districts: null,
-        vehicles: null
+        vehicles: null,
+        routes: null
     }
 
     constructor(id) {
@@ -21,6 +22,7 @@ export class LeafletMap {
         this.layers.containers = L.layerGroup().addTo(this.map);
         this.layers.districts = L.layerGroup().addTo(this.map);
         this.layers.vehicles = L.layerGroup().addTo(this.map);
+        this.layers.routes = L.layerGroup().addTo(this.map);
     }
 
     panTo(coords) {
