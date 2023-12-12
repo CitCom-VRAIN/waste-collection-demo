@@ -2,6 +2,8 @@ import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
 import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
+import { Optimizer } from './modules/Optimizer.js';
+
 
 (async function main() {
     // Init data manager
@@ -44,6 +46,15 @@ import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
         }
 
         updateMarkers(map, dataManager)
+    })
+
+    // Optimization
+    const optimizer = new Optimizer();
+
+    // On plan route button click
+    document.querySelector('#optimize-button').addEventListener('click', () => {
+        const solution = optimizer.optimize(dataManager.filteredWasteContainers)
+        console.log(solution)
     })
 }());
 
