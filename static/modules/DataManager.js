@@ -3,7 +3,6 @@ import { finishLoading, fillDistrictsSelector } from './UserInterface.js';
 import { WasteContainer } from './WasteContainer.js';
 import { Vehicle } from './Vehicle.js';
 import { District } from './District.js'
-//import turf from 'https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/+esm'
 
 export class DataManager {
 
