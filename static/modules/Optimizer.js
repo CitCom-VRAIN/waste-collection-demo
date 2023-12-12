@@ -6,9 +6,13 @@ export class Optimizer {
         this.httpClient = new HttpClient();
     }
 
-    async optimize(WasteContainers) {
-        let wasteContainersCoords = WasteContainers.map(container => container.location)
-        const data = { coords: JSON.stringify(wasteContainersCoords) }
+    async optimize(wasteContainers, vehicles) {
+        let wasteContainersCoords = wasteContainers.map(container => container.location)
+        const data = { 
+            coords: JSON.stringify(wasteContainersCoords), 
+            vehicles: JSON.stringify(vehicles) 
+        };
+        
         const solution = await this.httpClient.get('optimization', data);
         return solution;
     }

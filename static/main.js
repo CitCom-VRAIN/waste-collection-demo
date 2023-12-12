@@ -53,7 +53,7 @@ import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1"
 
     // On plan route button click
     document.querySelector('#optimize-button').addEventListener('click', async () => {
-        const solution = await optimizer.optimize(dataManager.filteredWasteContainers)
+        const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles)
         console.log(solution, solution.routes)
 
         // Print solution on map
