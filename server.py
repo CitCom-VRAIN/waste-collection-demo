@@ -106,7 +106,7 @@ def get_trucks():
                 "observedAt": "2023-11-16T23:01:12.111Z",
                 "type": "GeoProperty",
                 "value": {
-                    "coordinates": [-0.5047214787013878, 39.46724434900733],
+                    "coordinates": [-0.5052030675609576, 39.46955099682593],
                     "type": "Point",
                 },
             },
