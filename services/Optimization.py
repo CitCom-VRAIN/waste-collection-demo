@@ -4,7 +4,7 @@ from shapely.geometry import Point
 
 
 class Optimization:
-    def optimize(self, locations):
+    def optimize(self, locations, vehicles):
         coords = []
 
         for coord in locations:
@@ -16,23 +16,19 @@ class Optimization:
         # Vehicles start & end position
         vehicle_start_end = [-0.5045224463629362, 39.467567014494584]
 
-        # Define 2 vehicles. Check optimization parameters at https://github.com/VROOM-Project/vroom/blob/master/docs/API.md
-        vehicles = [
-            ors.optimization.Vehicle(
-                id=0,
-                profile="driving-car",
-                start=vehicle_start_end,
-                end=vehicle_start_end,
-                capacity=[10],
-            ),
-            ors.optimization.Vehicle(
-                id=1,
-                profile="driving-car",
-                start=vehicle_start_end,
-                end=vehicle_start_end,
-                capacity=[10],
-            ),
-        ]
+        # Create  ORS vehicles. Check optimization parameters at https://github.com/VROOM-Project/vroom/blob/master/docs/API.md
+        ors_vehicles = []
+
+        for index, vehicle in enumerate(vehicles):
+            ors_vehicles.append(
+                ors.optimization.Vehicle(
+                    id=index,
+                    profile="driving-car",
+                    start=[vehicle["location"]["lng"], vehicle["location"]["lat"]],
+                    end=[vehicle["location"]["lng"], vehicle["location"]["lat"]],
+                    capacity=[10],
+                )
+            )
 
         # Define job
         jobs = [
@@ -41,6 +37,6 @@ class Optimization:
         ]
 
         # Get optimization
-        optimized = client.optimization(jobs=jobs, vehicles=vehicles, geometry=True)
+        optimized = client.optimization(jobs=jobs, vehicles=ors_vehicles, geometry=True)
 
         return optimized
