@@ -3,7 +3,7 @@ import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
 import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
-
+import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
 
 (async function main() {
     // Init data manager
@@ -52,9 +52,20 @@ import { Optimizer } from './modules/Optimizer.js';
     const optimizer = new Optimizer();
 
     // On plan route button click
-    document.querySelector('#optimize-button').addEventListener('click', () => {
-        const solution = optimizer.optimize(dataManager.filteredWasteContainers)
-        console.log(solution)
+    document.querySelector('#optimize-button').addEventListener('click', async () => {
+        const solution = await optimizer.optimize(dataManager.filteredWasteContainers)
+        console.log(solution, solution.routes)
+
+        // Print solution on map
+        const lineColors = ["green", "blue", "yellow"]
+
+        map.layers.routes.clearLayers()
+        solution.routes.forEach((route, index) => {
+            const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes)
+        });
+
+
+
     })
 }());
 
