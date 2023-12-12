@@ -10,6 +10,7 @@ export class DataManager {
     wasteContainers = [];
     vehicles = [];
     districts = [];
+    filteredWasteContainers = [];
 
     constructor() {
         this.httpClient = new HttpClient();
@@ -37,6 +38,7 @@ export class DataManager {
         wasteContainersData.forEach(container => {
             this.wasteContainers.push(new WasteContainer(container.id, container.fillingLevel, container.location))
         });
+        this.filteredWasteContainers = this.wasteContainers;
 
         // Create Vehicle objects
         vehiclesData.forEach(vehicle => {
@@ -56,30 +58,31 @@ export class DataManager {
         const district = this.districts.find(district => district.id === districtID)
 
         // Copy original
-        let filteredWasteContainers = this.wasteContainers;
+        this.filteredWasteContainers = this.wasteContainers;
 
         // Filter by filling level filter
-        filteredWasteContainers = this.wasteContainers.filter(container => container.fillingLevel.value >= fillingLevel / 100);
+        this.filteredWasteContainers = this.wasteContainers.filter(container => container.fillingLevel.value >= fillingLevel / 100);
 
-        //
+        // Geo filter
         let newFilter = [];
         if (district) {
             // Filter by district
             let districtPolygon = turf.polygon([district.coordinates])
 
-            for (let i = 0; i < filteredWasteContainers.length; i++) {
+            for (let i = 0; i < this.filteredWasteContainers.length; i++) {
 
-                let wasteContainerLocation = filteredWasteContainers[i].location.value.coordinates;
+                let wasteContainerLocation = this.filteredWasteContainers[i].location.value.coordinates;
 
                 let point = turf.point(wasteContainerLocation);
                 let contains = turf.booleanPointInPolygon(point, districtPolygon);
 
                 if (contains) {
-                    newFilter.push(filteredWasteContainers[i])
+                    newFilter.push(this.filteredWasteContainers[i])
                 }
             }
+            this.filteredWasteContainers = newFilter;
             return newFilter;
         }
-        return filteredWasteContainers;
+        return this.filteredWasteContainers;
     }
 }
