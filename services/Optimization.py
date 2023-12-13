@@ -7,6 +7,7 @@ class Optimization:
     def optimize(self, locations, vehicles):
         coords = []
 
+        # Transform locations to ORS format
         for coord in locations:
             coords.append([coord["lng"], coord["lat"]])
 
