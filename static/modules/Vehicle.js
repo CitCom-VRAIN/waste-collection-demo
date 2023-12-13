@@ -11,6 +11,8 @@ export class Vehicle {
         this.brandName = brandName;
         this.fuelType = fuelType;
         this.cargoVolume = cargoVolume;
-        this.marker = new Marker(location, 'truck', 'green')
+        this.marker = new Marker(location, 'truck', 'green', true, null, () => {
+            openVehicleSettings(this)
+        })
     }
 }
