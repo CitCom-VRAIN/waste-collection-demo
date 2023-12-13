@@ -23,7 +23,7 @@ export class Marker {
                 });
 
             if (this.onclickEvent) {
-                marker.on('click', onclickEvent.bind(null, this.onclickEvent))
+                marker.on('click', this.onclickEvent)
             }
 
             if (this.tooltip) {
