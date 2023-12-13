@@ -44,4 +44,7 @@ function districtValue() {
     return document.querySelector("#districts-select").value || 'all';
 }
 
+document.querySelector("#vehicle-settings-close").addEventListener("click", closeVehicleSettings);
+document.querySelector("#vehicle-settings-cancel").addEventListener("click", closeVehicleSettings);
+
 export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, fillingLevelValue, districtValue }
