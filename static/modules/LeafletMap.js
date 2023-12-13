@@ -7,8 +7,8 @@ export class LeafletMap {
         routes: null
     }
 
-    constructor(id) {
-        this.map = L.map(id).setView([39.46990582380913, -0.3762880370023189], 14);
+    constructor(id, initialLocation) {
+        this.map = L.map(id).setView(initialLocation, 14);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             maxZoom: 19,
             attributionControl: false,
