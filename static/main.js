@@ -63,9 +63,6 @@ import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1"
         solution.routes.forEach((route, index) => {
             const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes)
         });
-
-
-
     })
 }());
 
