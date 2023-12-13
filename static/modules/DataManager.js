@@ -54,6 +54,7 @@ export class DataManager {
     }
 
     filter(fillingLevel, districtID) {
+        // Get target district
         const district = this.districts.find(district => district.id === districtID)
 
         // Copy original
@@ -70,9 +71,9 @@ export class DataManager {
 
             for (let i = 0; i < this.filteredWasteContainers.length; i++) {
 
-                let wasteContainerLocation = this.filteredWasteContainers[i].location.value.coordinates;
+                let wasteContainerLocation = this.filteredWasteContainers[i].location;
 
-                let point = turf.point(wasteContainerLocation);
+                let point = turf.point([wasteContainerLocation.lng, wasteContainerLocation.lat].reverse());
                 let contains = turf.booleanPointInPolygon(point, districtPolygon);
 
                 if (contains) {
