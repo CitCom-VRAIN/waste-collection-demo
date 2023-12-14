@@ -48,8 +48,9 @@ def disctricts():
 def optimization():
     coords = json.loads(request.args.get("coords"))
     vehicles = json.loads(request.args.get("vehicles"))
+    end_location = json.loads(request.args.get("end"))
     optimizer = Optimization()
-    optimization = optimizer.optimize(coords, vehicles)
+    optimization = optimizer.optimize(coords, vehicles, end_location)
     return optimization
 
 

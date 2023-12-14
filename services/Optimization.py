@@ -4,9 +4,8 @@ from shapely.geometry import Point
 
 
 class Optimization:
-    def optimize(self, locations, vehicles):
+    def optimize(self, locations, vehicles, end_location):
         coords = []
-
         # Transform locations to ORS format
         for coord in locations:
             coords.append([coord["lng"], coord["lat"]])
@@ -30,8 +29,8 @@ class Optimization:
                         vehicle["marker"]["location"]["lat"],
                     ],
                     end=[
-                        vehicle["marker"]["location"]["lng"],
-                        vehicle["marker"]["location"]["lat"],
+                        end_location["lng"],
+                        end_location["lat"],
                     ],
                     capacity=[10],
                 )

@@ -4,6 +4,7 @@ import { DataManager } from './modules/DataManager.js';
 import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
 import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
+import { Marker } from './modules/Marker.js';
 
 (async function main() {
     // Init data manager
@@ -24,6 +25,11 @@ import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1"
     dataManager.vehicles.forEach(vehicle => {
         vehicle.marker.addTo(map.layers.vehicles);
     });
+
+    // Add end marker
+    const endLocation = { lng: -0.4659541881677676, lat: 39.43387281671579 }
+    const endMarker = new Marker(endLocation, 'flag-checkered', 'red', true);
+    endMarker.addTo(map.layers.vehicles);
 
     // On filling level change
     document.querySelector('#filling-level').addEventListener('keyup', () => {
@@ -53,7 +59,7 @@ import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1"
 
     // On plan route button click
     document.querySelector('#optimize-button').addEventListener('click', async () => {
-        const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles)
+        const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location)
 
         // Print solution on map
         const lineColors = ["green", "blue", "yellow"]
