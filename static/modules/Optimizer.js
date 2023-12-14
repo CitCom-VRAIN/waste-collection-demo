@@ -7,12 +7,12 @@ export class Optimizer {
     }
 
     async optimize(wasteContainers, vehicles) {
-        let wasteContainersCoords = wasteContainers.map(container => container.location)
-        const data = { 
-            coords: JSON.stringify(wasteContainersCoords), 
-            vehicles: JSON.stringify(vehicles) 
+        let wasteContainersCoords = wasteContainers.map(container => container.marker.location)
+        const data = {
+            coords: JSON.stringify(wasteContainersCoords),
+            vehicles: JSON.stringify(vehicles)
         };
-        
+
         const solution = await this.httpClient.get('optimization', data);
         return solution;
     }

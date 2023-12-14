@@ -71,7 +71,7 @@ export class DataManager {
 
             for (let i = 0; i < this.filteredWasteContainers.length; i++) {
 
-                let wasteContainerLocation = this.filteredWasteContainers[i].location;
+                let wasteContainerLocation = this.filteredWasteContainers[i].marker.location;
 
                 let point = turf.point([wasteContainerLocation.lng, wasteContainerLocation.lat].reverse());
                 let contains = turf.booleanPointInPolygon(point, districtPolygon);

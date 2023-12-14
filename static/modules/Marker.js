@@ -1,12 +1,14 @@
 export class Marker {
-    constructor(location, icon, color, draggable, tooltip = null, onclickEvent = null, onmoveEvent = null) {
-        this.location = location;
+    constructor(location, icon, color, draggable, tooltip = null, onclickEvent = null) {
+        this.location = {
+            lng: location.value.coordinates[0],
+            lat: location.value.coordinates[1]
+        };
         this.icon = icon;
         this.color = color;
         this.draggable = draggable;
         this.tooltip = tooltip;
         this.onclickEvent = onclickEvent;
-        this.onmoveEvent = onmoveEvent;
     }
     addTo(layer) {
         // Custom marker
@@ -16,21 +18,26 @@ export class Marker {
             prefix: 'fa'
         });
         // Add to map
-        if (this.location && this.location.value) {
-            const marker = L.marker(this.location.value.coordinates.reverse(),
+        if (this.location) {
+            // Create Leaflet marker. Leaflet expects [lat, lng] format
+            const marker = L.marker([this.location.lat, this.location.lng],
                 {
                     icon: icon,
                     draggable: this.draggable
                 });
 
+            // Bind click event
             if (this.onclickEvent) {
                 marker.on('click', this.onclickEvent);
             }
 
-            if (this.onmoveEvent) {
-                marker.on('move', this.onmoveEvent);
-            }
+            // On move, update location
+            marker.on('move', (event) => {
+                this.location.lat = event.latlng.lat;
+                this.location.lng = event.latlng.lng;
+            });
 
+            // Bind tooltip
             if (this.tooltip) {
                 marker.bindTooltip(this.tooltip);
             }

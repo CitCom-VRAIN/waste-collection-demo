@@ -13,7 +13,7 @@ import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1"
     await dataManager.fetchData();
 
     // Init Leaflet map
-    const map = new LeafletMap('map', [dataManager.wasteContainers[0].location.lat, dataManager.wasteContainers[0].location.lng]);
+    const map = new LeafletMap('map', [dataManager.wasteContainers[0].marker.location.lat, dataManager.wasteContainers[0].marker.location.lng]);
 
     // Add WasteContainer markers
     dataManager.wasteContainers.forEach(container => {
