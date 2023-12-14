@@ -29,9 +29,9 @@ export class Marker {
             }
 
             // On move, update location
-            marker.on('move', (event) => {
-                this.location.lat = event.latlng.lat;
-                this.location.lng = event.latlng.lng;
+            marker.on('dragend', (event) => {
+                this.location.lat = event.target.getLatLng().lat;
+                this.location.lng = event.target.getLatLng().lng;
             });
 
             // Bind tooltip
