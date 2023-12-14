@@ -1,11 +1,12 @@
 export class Marker {
-    constructor(location, icon, color, draggable, tooltip = null, onclickEvent = null) {
+    constructor(location, icon, color, draggable, tooltip = null, onclickEvent = null, onmoveEvent = null) {
         this.location = location;
         this.icon = icon;
         this.color = color;
         this.draggable = draggable;
         this.tooltip = tooltip;
         this.onclickEvent = onclickEvent;
+        this.onmoveEvent = onmoveEvent;
     }
     addTo(layer) {
         // Custom marker
@@ -23,7 +24,11 @@ export class Marker {
                 });
 
             if (this.onclickEvent) {
-                marker.on('click', this.onclickEvent)
+                marker.on('click', this.onclickEvent);
+            }
+
+            if (this.onmoveEvent) {
+                marker.on('move', this.onmoveEvent);
             }
 
             if (this.tooltip) {

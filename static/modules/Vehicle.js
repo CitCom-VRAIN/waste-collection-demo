@@ -13,6 +13,10 @@ export class Vehicle {
         this.cargoVolume = cargoVolume;
         this.marker = new Marker(location, 'truck', 'green', true, null, () => {
             openVehicleSettings(this)
-        })
+        },
+            (event) => {
+                this.location.lat = event.latlng.lat;
+                this.location.lng = event.latlng.lng;
+            })
     }
 }
