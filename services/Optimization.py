@@ -25,8 +25,14 @@ class Optimization:
                 ors.optimization.Vehicle(
                     id=index,
                     profile="driving-car",
-                    start=[vehicle["location"]["lng"], vehicle["location"]["lat"]],
-                    end=[vehicle["location"]["lng"], vehicle["location"]["lat"]],
+                    start=[
+                        vehicle["marker"]["location"]["lng"],
+                        vehicle["marker"]["location"]["lat"],
+                    ],
+                    end=[
+                        vehicle["marker"]["location"]["lng"],
+                        vehicle["marker"]["location"]["lat"],
+                    ],
                     capacity=[10],
                 )
             )
