@@ -28,7 +28,7 @@ import { Marker } from './modules/Marker.js';
 
     // Add end marker
     const endLocation = { lng: -0.4659541881677676, lat: 39.43387281671579 }
-    const endMarker = new Marker(endLocation, 'flag-checkered', 'red', true);
+    const endMarker = new Marker(endLocation, 'flag-checkered', 'red', true, '<b>End location</b>');
     endMarker.addTo(map.layers.vehicles);
 
     // On filling level change
