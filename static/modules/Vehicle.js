@@ -11,12 +11,16 @@ export class Vehicle {
         this.brandName = brandName;
         this.fuelType = fuelType;
         this.cargoVolume = cargoVolume;
-        this.marker = new Marker(location, 'truck', 'green', true, null, () => {
-            openVehicleSettings(this)
-        },
+        this.marker = new Marker(location, 'truck', 'green', true, null,
+            // On click, open settings modal
+            () => {
+                openVehicleSettings(this)
+            },
+            // On move, update location
             (event) => {
                 this.location.lat = event.latlng.lat;
                 this.location.lng = event.latlng.lng;
-            })
+            }
+        );
     }
 }
