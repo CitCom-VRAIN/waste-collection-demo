@@ -44,3 +44,7 @@ input,
 select {
     width: 100% !important;
 }
+
+.help {
+    font-weight: 500;
+}

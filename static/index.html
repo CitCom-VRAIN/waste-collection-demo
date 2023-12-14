@@ -66,6 +66,63 @@ https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js
                         </span>
                     </p>
                 </div>
+                <div class="field">
+                    <label class="label">Maximum travel time (hours)</label>
+                    <p class="control has-icons-left">
+                        <input id="vehicle-travel-time" class="input" type="number" placeholder="Maxium travel time">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-stopwatch"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Maximum distance (km)</label>
+                    <p class="control has-icons-left">
+                        <input id="vehicle-travel-distance" class="input" type="number" placeholder="Maximum distance">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-route"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Costs</label>
+                </div>
+
+                <div class="field">
+                    <label class="label">
+                        <p class="help">Fixed cost of using this vehicle in the solution</p>
+                    </label>
+                    <p class="control has-icons-left">
+                        <input id="vehicle-fixed-cost" class="input" type="number" placeholder="Fixed cost">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-coins"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label class="label">
+                        <p class="help">Cost for one hour of travel time with this vehicle</p>
+                    </label>
+                    <p class="control has-icons-left">
+                        <input id="vehicle-hour-cost" class="input" type="number" placeholder="Cost per hour">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-coins"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label class="label">
+                        <p class="help">FCost for one km of travel time with this vehicle</p>
+                    </label>
+                    <p class="control has-icons-left">
+                        <input id="vehicle-km-cost" class="input" type="number" placeholder="Cost per km">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-coins"></i>
+                        </span>
+                    </p>
+                </div>
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-success">Save changes</button>
@@ -123,6 +180,19 @@ https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js
                     </span>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">Service
+                    <p class="help">Time it takes to load/unload when servicing a job.</p>
+                </label>
+
+                <div class="control has-icons-left">
+                    <input id="filling-level" class="input" type="number" placeholder="50">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-stopwatch"></i>
+                    </span>
+                </div>
+            </div>
+
             <div class="field is-grouped">
                 <p class="control">
                     <button id="optimize-button" class="button is-link">
