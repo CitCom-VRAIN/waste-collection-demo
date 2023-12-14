@@ -1,9 +1,6 @@
 export class Marker {
     constructor(location, icon, color, draggable, tooltip = null, onclickEvent = null) {
-        this.location = {
-            lng: location.value.coordinates[0],
-            lat: location.value.coordinates[1]
-        };
+        this.location = location;
         this.icon = icon;
         this.color = color;
         this.draggable = draggable;

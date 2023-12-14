@@ -35,13 +35,13 @@ export class DataManager {
 
         // Create WasteContainer objects
         wasteContainersData.forEach(container => {
-            this.wasteContainers.push(new WasteContainer(container.id, container.fillingLevel, container.location))
+            this.wasteContainers.push(new WasteContainer(container.id, container.fillingLevel, { lng: container.location.value.coordinates[0], lat: container.location.value.coordinates[1] }))
         });
         this.filteredWasteContainers = this.wasteContainers;
 
         // Create Vehicle objects
         vehiclesData.forEach(vehicle => {
-            this.vehicles.push(new Vehicle(vehicle.id, vehicle.location, vehicle.brandName, vehicle.fuelType, vehicle.cargoVolume))
+            this.vehicles.push(new Vehicle(vehicle.id, { lng: vehicle.location.value.coordinates[0], lat: vehicle.location.value.coordinates[1] }, vehicle.brandName, vehicle.fuelType, vehicle.cargoVolume))
         });
 
         // Create District objects
