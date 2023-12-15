@@ -15,8 +15,13 @@ pip install -r requirements.txt
 ```
 
 3. Create an `.env` file using `.env.example` as a guide. Fill it with your own settings.
+   
+4. Set environment variables
+```bash
+source .env
+```
 
-4. Start server and open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser 
+5. Start server and open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser 
 ```bash
 flask --app server run
 ```

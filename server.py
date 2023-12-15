@@ -1,13 +1,9 @@
 import os
-from dotenv import load_dotenv
 from services.Auth import Auth
 from services.BrokerLD import BrokerLD
 from services.Optimization import Optimization
 import requests
 import json
-
-# Load env variables
-load_dotenv()
 
 # Init flask server
 from flask import Flask, request
