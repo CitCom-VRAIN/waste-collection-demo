@@ -13,9 +13,6 @@ class Optimization:
         # Openroute service API key
         client = ors.Client(key=os.environ.get("OPENROUTESERVICE_API_KEY"))
 
-        # Vehicles start & end position
-        vehicle_start_end = [-0.5045224463629362, 39.467567014494584]
-
         # Create  ORS vehicles. Check optimization parameters at https://github.com/VROOM-Project/vroom/blob/master/docs/API.md
         ors_vehicles = []
 
