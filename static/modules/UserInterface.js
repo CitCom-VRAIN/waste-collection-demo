@@ -95,14 +95,17 @@ function resetForm() {
 
 function showNotification(message) {
     notification.classList.remove("is-hidden");
+    notification.classList.remove("hide");
+    notification.classList.add("show");
     notificationMessage.innerHTML = message;
 
     // Hide after 5 seconds
-    setTimeout(hideNotification, 3000);
+    setTimeout(hideNotification, 4000);
 }
 
 function hideNotification() {
-    notification.classList.add("is-hidden");
+    notification.classList.remove("show");
+    notification.classList.add("hide");
 }
 
 export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
