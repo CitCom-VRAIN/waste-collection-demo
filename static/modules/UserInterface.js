@@ -96,9 +96,12 @@ function resetForm() {
 function showNotification(message) {
     notification.classList.remove("is-hidden");
     notificationMessage.innerHTML = message;
+
+    // Hide after 5 seconds
+    setTimeout(hideNotification, 3000);
 }
 
-function hideNotification(message) {
+function hideNotification() {
     notification.classList.add("is-hidden");
 }
 
