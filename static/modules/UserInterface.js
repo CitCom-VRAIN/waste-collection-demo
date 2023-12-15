@@ -6,7 +6,7 @@
 const loading = document.querySelector("#loading");
 const loadingAnimation = document.querySelector("#loading-animation");
 const dashboard = document.querySelector("#dashboard");
-const error = document.querySelector("#error");
+const warning = document.querySelector("#error");
 const statusMessage = document.querySelector("#status-message");
 
 // Form
@@ -55,7 +55,7 @@ function finishLoading(error) {
         loading.classList.remove("is-hidden")
         dashboard.classList.add("is-hidden")
 
-        error.classList.remove("is-hidden")
+        warning.classList.remove("is-hidden")
         statusMessage.innerHTML = `Network error. Please, reload the page to try again.`;
     } else {
         loading.classList.add("is-hidden")
