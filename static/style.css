@@ -40,8 +40,14 @@ option {
     margin-bottom: 25px;
 }
 
-
-
 .help {
     font-weight: 500;
+}
+
+.notification {
+    width: 22rem;
+    right: 1%;
+    margin: 1rem;
+    position: absolute;
+    z-index: 9999;
 }

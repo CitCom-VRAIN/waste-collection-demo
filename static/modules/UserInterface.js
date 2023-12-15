@@ -25,6 +25,11 @@ const vehicleFuel = document.getElementById('vehicle-fuel');
 const vehicleBrand = document.getElementById('vehicle-brand');
 const vehicleCargo = document.getElementById('vehicle-cargo');
 
+// Notification
+const notification = document.querySelector("#notification");
+const notificationMessage = document.querySelector("#notification-message");
+const notificationCloseButton = document.querySelector("#notification-close");
+
 /* -------------------
 ------- Events -------
 ---------------------*/
@@ -33,6 +38,7 @@ vehicleSettingsCloseButton.addEventListener("click", closeVehicleSettings);
 vehicleSettingsCancelButton.addEventListener("click", closeVehicleSettings);
 vehicleSettingsSaveButton.addEventListener("click", closeVehicleSettings);
 resetFormButton.addEventListener("click", resetForm);
+notificationCloseButton.addEventListener("click", hideNotification)
 
 /* -------------------
 ---- UI functions ----
@@ -87,4 +93,13 @@ function resetForm() {
     fillingLevelInput.dispatchEvent(keyupEvent);
 }
 
-export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton }
+function showNotification(message) {
+    notification.classList.remove("is-hidden");
+    notificationMessage.innerHTML = message;
+}
+
+function hideNotification(message) {
+    notification.classList.add("is-hidden");
+}
+
+export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
