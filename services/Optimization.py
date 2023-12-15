@@ -40,6 +40,23 @@ class Optimization:
         ]
 
         # Get optimization
-        optimized = client.optimization(jobs=jobs, vehicles=ors_vehicles, geometry=True)
+        try:
+            optimized = client.optimization(
+                jobs=jobs, vehicles=ors_vehicles, geometry=True
+            )
+        except Exception as error:
+            # APIException to string
+            error_string = str(error)
+            
+            # Adapt string to JSON format
+            error = (
+                "{"
+                + error_string[error_string.find("{") + 1 : error_string.find("}")]
+                + "}"
+            ).replace("'", '"')
 
-        return optimized
+            # Return error
+            return error
+
+        else:
+            return optimized
