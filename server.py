@@ -10,7 +10,7 @@ import json
 load_dotenv()
 
 # Init flask server
-from flask import Flask, request, render_template
+from flask import Flask, request
 from flask_cors import CORS
 
 app = Flask(__name__)
