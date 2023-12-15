@@ -20,6 +20,7 @@ const optimizeButton = document.querySelector('#optimize-button');
 const vehicleSettings = document.getElementById('vehicle-settings');
 const vehicleSettingsCloseButton = document.querySelector("#vehicle-settings-close");
 const vehicleSettingsCancelButton = document.querySelector("#vehicle-settings-cancel");
+const vehicleSettingsSaveButton = document.querySelector('#vehicle-settings-save');
 const vehicleFuel = document.getElementById('vehicle-fuel');
 const vehicleBrand = document.getElementById('vehicle-brand');
 const vehicleCargo = document.getElementById('vehicle-cargo');
@@ -30,6 +31,7 @@ const vehicleCargo = document.getElementById('vehicle-cargo');
 
 vehicleSettingsCloseButton.addEventListener("click", closeVehicleSettings);
 vehicleSettingsCancelButton.addEventListener("click", closeVehicleSettings);
+vehicleSettingsSaveButton.addEventListener("click", closeVehicleSettings);
 resetFormButton.addEventListener("click", resetForm);
 
 /* -------------------
