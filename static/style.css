@@ -40,10 +40,7 @@ option {
     margin-bottom: 25px;
 }
 
-input,
-select {
-    width: 100% !important;
-}
+
 
 .help {
     font-weight: 500;
