@@ -1,7 +1,7 @@
 import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
-import { fillingLevelValue, districtValue } from './modules/UserInterface.js'
+import { districtsSelect, fillingLevelInput, optimizeButton } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
 import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
 import { Marker } from './modules/Marker.js';
@@ -32,15 +32,17 @@ import { Marker } from './modules/Marker.js';
     endMarker.addTo(map.layers.vehicles);
 
     // On filling level change
-    document.querySelector('#filling-level').addEventListener('keyup', () => {
+    fillingLevelInput.addEventListener('keyup', () => {
         // Delay to let user end
         setTimeout(() => {
+            map.layers.routes.clearLayers();
             updateMarkers(map, dataManager)
         }, 500)
     });
 
     // On district change
-    document.querySelector('#districts-select').addEventListener('change', (event) => {
+    districtsSelect.addEventListener('change', (event) => {
+        map.layers.routes.clearLayers();
         const district = dataManager.districts.find(district => district.id === event.target.value)
 
         if (district) {
@@ -58,22 +60,24 @@ import { Marker } from './modules/Marker.js';
     const optimizer = new Optimizer();
 
     // On plan route button click
-    document.querySelector('#optimize-button').addEventListener('click', async () => {
-        const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location)
+    optimizeButton.addEventListener('click', async () => {
+        if (dataManager.filteredWasteContainers.length > 0) {
+            const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location)
 
-        // Print solution on map
-        const lineColors = ["green", "blue", "yellow"]
+            // Print solution on map
+            const lineColors = ["green", "blue", "yellow"]
 
-        map.layers.routes.clearLayers()
-        solution.routes.forEach((route, index) => {
-            const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes)
-        });
+            map.layers.routes.clearLayers();
+            solution.routes.forEach((route, index) => {
+                const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes)
+            });
+        }
     })
 }());
 
 function updateMarkers(map, dataManager) {
     // Filter
-    const filteredWasteContainers = dataManager.filter(fillingLevelValue(), districtValue())
+    const filteredWasteContainers = dataManager.filter(fillingLevelInput.value || 0, districtsSelect.value || 'all')
 
     // Clear
     map.layers.containers.clearLayers()
