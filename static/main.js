@@ -1,7 +1,7 @@
 import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
-import { districtsSelect, fillDistrictsSelector, fillingLevelInput, finishLoading, optimizeButton, showNotification } from './modules/UserInterface.js'
+import { districtsSelect, fillDistrictsSelector, fillingLevelInput, hideLoading, optimizeButton, showNotification } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
 import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
 import { Marker } from './modules/Marker.js';
@@ -14,9 +14,9 @@ import { Marker } from './modules/Marker.js';
     const fetch = await dataManager.fetchData();
 
     if (!fetch) {
-        finishLoading();
+        hideLoading();
     } else {
-        finishLoading(fetch.error);
+        showNotification('Error when fetching data. Please, reload the page to try again.');
         return;
     }
 

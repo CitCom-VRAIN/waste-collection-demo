@@ -4,10 +4,7 @@
 
 // Loading screen
 const loading = document.querySelector("#loading");
-const loadingAnimation = document.querySelector("#loading-animation");
 const dashboard = document.querySelector("#dashboard");
-const warning = document.querySelector("#error");
-const statusMessage = document.querySelector("#status-message");
 
 // Form
 const districtsSelect = document.querySelector("#districts-select");
@@ -43,24 +40,9 @@ notificationCloseButton.addEventListener("click", hideNotification)
 /* -------------------
 ---- UI functions ----
 ---------------------*/
-function initLoading() {
-    loadingAnimation.classList.remove("is-hidden")
-    loading.classList.remove("is-hidden")
-    dashboard.classList.add("is-hidden")
-}
-
-function finishLoading(error) {
-    loadingAnimation.classList.add("is-hidden")
-    if (error) {
-        loading.classList.remove("is-hidden")
-        dashboard.classList.add("is-hidden")
-
-        warning.classList.remove("is-hidden")
-        statusMessage.innerHTML = `Network error. Please, reload the page to try again.`;
-    } else {
-        loading.classList.add("is-hidden")
-        dashboard.classList.remove("is-hidden")
-    }
+function hideLoading() {
+    loading.classList.add("is-hidden")
+    dashboard.classList.remove("is-hidden")
 }
 
 function fillDistrictsSelector(districts) {
@@ -93,14 +75,16 @@ function resetForm() {
     fillingLevelInput.dispatchEvent(keyupEvent);
 }
 
-function showNotification(message) {
+function showNotification(message, autoHide = false) {
     notification.classList.remove("is-hidden");
     notification.classList.remove("hide");
     notification.classList.add("show");
     notificationMessage.innerHTML = message;
 
-    // Hide after 5 seconds
-    setTimeout(hideNotification, 4000);
+    if (autoHide) {
+        // Hide after 5 seconds
+        setTimeout(hideNotification, 4000);
+    }
 }
 
 function hideNotification() {
@@ -108,4 +92,4 @@ function hideNotification() {
     notification.classList.add("hide");
 }
 
-export { initLoading, finishLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
+export { hideLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
