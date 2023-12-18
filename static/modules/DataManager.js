@@ -64,7 +64,7 @@ export class DataManager {
         this.filteredWasteContainers = this.wasteContainers.filter(container => container.fillingLevel.value >= fillingLevel / 100);
 
         // Geo filter
-        let newFilter = [];
+        let geoFilter = [];
         if (district) {
             // Filter by district
             let districtPolygon = turf.polygon([district.coordinates])
@@ -77,11 +77,11 @@ export class DataManager {
                 let contains = turf.booleanPointInPolygon(point, districtPolygon);
 
                 if (contains) {
-                    newFilter.push(this.filteredWasteContainers[i])
+                    geoFilter.push(this.filteredWasteContainers[i])
                 }
             }
-            this.filteredWasteContainers = newFilter;
-            return newFilter;
+            this.filteredWasteContainers = geoFilter;
+            return geoFilter;
         }
         return this.filteredWasteContainers;
     }
