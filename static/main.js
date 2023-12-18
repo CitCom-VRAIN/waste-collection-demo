@@ -72,6 +72,9 @@ import { Marker } from './modules/Marker.js';
     // On plan route button click
     optimizeButton.addEventListener('click', async () => {
         if (dataManager.filteredWasteContainers.length > 0) {
+            // Clear current solution
+            map.layers.routes.clearLayers()
+
             // Show loading spinner
             initOptimizationLoading();
 
