@@ -1,7 +1,7 @@
 import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
-import { districtsSelect, fillDistrictsSelector, fillingLevelInput, hideLoadingScreen, optimizeButton, showNotification } from './modules/UserInterface.js'
+import { districtsSelect, endOptimizationLoading, fillDistrictsSelector, fillingLevelInput, hideLoadingScreen, initOptimizationLoading, optimizeButton, showNotification } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
 import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
 import { Marker } from './modules/Marker.js';
@@ -72,7 +72,14 @@ import { Marker } from './modules/Marker.js';
     // On plan route button click
     optimizeButton.addEventListener('click', async () => {
         if (dataManager.filteredWasteContainers.length > 0) {
+            // Show loading spinner
+            initOptimizationLoading();
+
+            // Get solution
             const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location)
+
+            // Hide loading spinner
+            endOptimizationLoading();
 
             if (solution.error) {
                 showNotification(solution.error)

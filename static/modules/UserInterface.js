@@ -92,4 +92,16 @@ function hideNotification() {
     notification.classList.add("hide");
 }
 
-export { hideLoadingScreen, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
+function initOptimizationLoading() {
+    optimizeButton.classList.add('is-loading');
+    optimizeButton.disabled = true;
+    resetFormButton.disabled = true;
+}
+
+function endOptimizationLoading() {
+    optimizeButton.classList.remove('is-loading');
+    optimizeButton.disabled = false;
+    resetFormButton.disabled = false;
+}
+
+export { hideLoadingScreen, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification, initOptimizationLoading, endOptimizationLoading }
