@@ -1,5 +1,4 @@
 import { HttpClient } from './HttpClient.js';
-import { finishLoading, fillDistrictsSelector } from './UserInterface.js';
 import { WasteContainer } from './WasteContainer.js';
 import { Vehicle } from './Vehicle.js';
 import { District } from './District.js'
@@ -25,10 +24,8 @@ export class DataManager {
         const error = wasteContainersData.error || vehiclesData.error || districtsData.error;
 
         if (error) {
-            finishLoading(error)
-            return;
+            return { error: error };
         }
-        finishLoading()
 
         // Clean wasteContainers data
         wasteContainersData = wasteContainersData.filter(container => 'fillingLevel' in container && 'location' in container)
@@ -48,9 +45,6 @@ export class DataManager {
         districtsData.forEach(district => {
             this.districts.push(new District(district.nombre, district.nombre, district.geo_shape.geometry.coordinates[0], district.geo_point_2d))
         });
-
-        // Fill select with districts
-        fillDistrictsSelector(this.districts)
     }
 
     filter(fillingLevel, districtID) {
