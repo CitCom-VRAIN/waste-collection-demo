@@ -40,7 +40,7 @@ notificationCloseButton.addEventListener("click", hideNotification)
 /* -------------------
 ---- UI functions ----
 ---------------------*/
-function hideLoading() {
+function hideLoadingScreen() {
     loading.classList.add("is-hidden")
     dashboard.classList.remove("is-hidden")
 }
@@ -92,4 +92,4 @@ function hideNotification() {
     notification.classList.add("hide");
 }
 
-export { hideLoading, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
+export { hideLoadingScreen, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification }
