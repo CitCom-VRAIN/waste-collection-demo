@@ -73,13 +73,13 @@ import { Marker } from './modules/Marker.js';
     optimizeButton.addEventListener('click', async () => {
         if (dataManager.filteredWasteContainers.length > 0) {
             // Clear current solution
-            map.layers.routes.clearLayers()
+            map.layers.routes.clearLayers();
 
             // Show loading spinner
             initOptimizationLoading();
 
             // Get solution
-            const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location)
+            const solution = await optimizer.optimize(dataManager.filteredWasteContainers, dataManager.vehicles, endMarker.location);
 
             // Hide loading spinner
             endOptimizationLoading();
@@ -90,11 +90,11 @@ import { Marker } from './modules/Marker.js';
             }
 
             // Print solution on map
-            const lineColors = ["green", "blue", "yellow"]
+            const lineColors = ["green", "blue", "yellow"];
 
             map.layers.routes.clearLayers();
             solution.routes.forEach((route, index) => {
-                const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes)
+                const polyline = L.polyline(MapboxPolyline.decode(route.geometry), { color: lineColors[index] }).addTo(map.layers.routes);
             });
         }
     })
@@ -102,7 +102,7 @@ import { Marker } from './modules/Marker.js';
 
 function updateMarkers(map, dataManager) {
     // Filter
-    const filteredWasteContainers = dataManager.filter(fillingLevelInput.value || 0, districtsSelect.value || 'all')
+    const filteredWasteContainers = dataManager.filter(fillingLevelInput.value || 0, districtsSelect.value || 'all');
 
     // Clear
     map.layers.containers.clearLayers()
