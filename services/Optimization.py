@@ -1,7 +1,5 @@
 import os
 import openrouteservice as ors
-from shapely.geometry import Point
-
 
 class Optimization:
     def optimize(self, locations, vehicles, end_location):
