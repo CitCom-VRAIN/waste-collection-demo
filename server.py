@@ -1,6 +1,6 @@
 import os
-from services.Auth import Auth
-from services.BrokerLD import BrokerLD
+from lib.ngsildclient.Auth import Auth
+from lib.ngsildclient.Client import Client
 from services.Optimization import Optimization
 import requests
 import json
@@ -61,7 +61,7 @@ def get_all_WasteContainers():
     token = auth.get_auth_token_subservice(service, subservice)
 
     # New Broker NGSI-LD connection
-    broker = BrokerLD()
+    broker = Client()
 
     # Fetch all WasteContainer entities
     limit = 400  # Entites per page (TODO: Implement pagination with response.headers["fiware-total-count"] & offset)
