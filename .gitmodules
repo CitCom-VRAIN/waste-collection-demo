@@ -1,3 +1,0 @@
-[submodule "lib/ngsild-client"]
-	path = lib/ngsild-client
-	url = https://github.com/CitCom-VRAIN/ngsild-client.git
