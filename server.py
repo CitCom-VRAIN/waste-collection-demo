@@ -125,36 +125,6 @@ def get_trucks():
 
     return vehicles
 
-
-def get_WasteContainers_within_area(polygon):
-    # Define service & subservice
-    service = "tef_vlci"
-    subservice = "/residuos_contenedores_vlc"
-
-    # Authenticate
-    auth = Auth()
-    token = auth.get_auth_token_subservice(service, subservice)
-
-    # New Broker NGSI-LD connection
-    broker = BrokerLD()
-
-    # Fetch all WasteContainer entities
-
-    limit = 400  # Entites per page (TODO: Implement pagination with response.headers["fiware-total-count"] & offset)
-    data = broker.get_all_entities_by_type_and_georel(
-        "WasteContainer",
-        service,
-        subservice,
-        token,
-        "coveredBy",
-        "polygon",
-        polygon,
-        limit,
-    ).json()
-
-    return data
-
-
 def get_districts():
     districtsURL = os.environ.get("DISTRICTS_API")
     response = requests.get(districtsURL)
