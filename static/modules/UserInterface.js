@@ -7,8 +7,6 @@ const loading = document.querySelector("#loading");
 const dashboard = document.querySelector("#dashboard");
 
 // Form
-const districtsSelect = document.querySelector("#districts-select");
-const districtsSelectDiv = document.querySelector("#districts-select-div");
 const fillingLevelInput = document.querySelector("#filling-level");
 const resetFormButton = document.querySelector("#reset-form");
 const optimizeButton = document.querySelector('#optimize-button');
@@ -45,13 +43,6 @@ function hideLoadingScreen() {
     dashboard.classList.remove("is-hidden")
 }
 
-function fillDistrictsSelector(districts) {
-    districts.forEach(district => {
-        districtsSelect.innerHTML += `<option value="${district.name}">${district.name.toLowerCase()}</option>`
-    });
-    districtsSelectDiv.classList.remove('is-loading')
-}
-
 function openVehicleSettings(vehicle) {
     vehicleSettings.classList.add("is-active");
     vehicleFuel.value = vehicle.fuelType;
@@ -67,9 +58,6 @@ function resetForm() {
     // Change event
     const changeEvent = new Event('change');
     const keyupEvent = new Event('keyup');
-
-    districtsSelect.value = "all";
-    districtsSelect.dispatchEvent(changeEvent);
 
     fillingLevelInput.value = "";
     fillingLevelInput.dispatchEvent(keyupEvent);
@@ -104,4 +92,4 @@ function endOptimizationLoading() {
     resetFormButton.disabled = false;
 }
 
-export { hideLoadingScreen, fillDistrictsSelector, openVehicleSettings, districtsSelect, fillingLevelInput, optimizeButton, showNotification, initOptimizationLoading, endOptimizationLoading }
+export { hideLoadingScreen, openVehicleSettings, fillingLevelInput, optimizeButton, showNotification, initOptimizationLoading, endOptimizationLoading }

@@ -2,7 +2,6 @@ export class LeafletMap {
 
     layers = {
         containers: null,
-        districts: null,
         vehicles: null,
         routes: null
     }
@@ -20,7 +19,6 @@ export class LeafletMap {
 
         // Create layerGroups
         this.layers.containers = L.layerGroup().addTo(this.map);
-        this.layers.districts = L.layerGroup().addTo(this.map);
         this.layers.vehicles = L.layerGroup().addTo(this.map);
         this.layers.routes = L.layerGroup().addTo(this.map);
     }

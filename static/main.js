@@ -1,7 +1,7 @@
 import * as leaflet from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
 import { LeafletMap } from './modules/LeafletMap.js';
 import { DataManager } from './modules/DataManager.js';
-import { districtsSelect, endOptimizationLoading, fillDistrictsSelector, fillingLevelInput, hideLoadingScreen, initOptimizationLoading, optimizeButton, showNotification } from './modules/UserInterface.js'
+import { endOptimizationLoading, fillingLevelInput, hideLoadingScreen, initOptimizationLoading, optimizeButton, showNotification } from './modules/UserInterface.js'
 import { Optimizer } from './modules/Optimizer.js';
 import * as MapboxPolyline from "https://cdn.skypack.dev/@mapbox/polyline@1.1.1";
 import { Marker } from './modules/Marker.js';
@@ -19,9 +19,6 @@ import { Marker } from './modules/Marker.js';
         showNotification('Error when fetching data. Please, reload the page to try again.');
         return;
     }
-
-    // Fill select with districts
-    fillDistrictsSelector(dataManager.districts);
 
     // Init Leaflet map
     const map = new LeafletMap('map', [dataManager.wasteContainers[0].marker.location.lat, dataManager.wasteContainers[0].marker.location.lng]);
@@ -49,22 +46,6 @@ import { Marker } from './modules/Marker.js';
             updateMarkers(map, dataManager)
         }, 500)
     });
-
-    // On district change
-    districtsSelect.addEventListener('change', (event) => {
-        map.layers.routes.clearLayers();
-        const district = dataManager.districts.find(district => district.id === event.target.value)
-
-        if (district) {
-            map.layers.districts.clearLayers();
-            district.polygon.addTo(map.layers.districts)
-            map.panTo(district.centroid)
-        } else {
-            map.layers.districts.clearLayers();
-        }
-
-        updateMarkers(map, dataManager)
-    })
 
     // Optimization
     const optimizer = new Optimizer();
@@ -102,7 +83,7 @@ import { Marker } from './modules/Marker.js';
 
 function updateMarkers(map, dataManager) {
     // Filter
-    const filteredWasteContainers = dataManager.filter(fillingLevelInput.value || 0, districtsSelect.value || 'all');
+    const filteredWasteContainers = dataManager.filter(fillingLevelInput.value || 0);
 
     // Clear
     map.layers.containers.clearLayers()
