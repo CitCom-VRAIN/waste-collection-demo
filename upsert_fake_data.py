@@ -163,25 +163,6 @@ fake_vehicles = vehicles = [
         "name": "MBenz-Econic2014",
         "vehicleType": "lorry",
     },
-    {
-        "id": "urn:ngsi-ld:VehicleModel:vehiclemodelB:econic",
-        "location": {
-            "observedAt": "2023-11-16T23:01:12.111Z",
-            "type": "GeoProperty",
-            "value": {
-                "coordinates": [-0.5052030675609576, 39.46955099682593],
-                "type": "Point",
-            },
-        },
-        "type": "VehicleModel",
-        "brandName": "Mercedes Benz",
-        "cargoVolume": 1000,
-        "fuelType": "diesel",
-        "manufacturerName": "Daimler",
-        "modelName": "Econic",
-        "name": "MBenz-Econic2014",
-        "vehicleType": "lorry",
-    },
 ]
 # New Broker NGSI-LD connection
 broker = Client()
