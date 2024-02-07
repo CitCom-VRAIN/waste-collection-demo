@@ -1,3 +1,8 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
 from lib.ngsildclient.Client import Client
 
 fake_containers = [
@@ -168,5 +173,5 @@ fake_vehicles = vehicles = [
 broker = Client()
 
 # Upsert
-broker.upsert_entities(fake_containers)
-broker.upsert_entities(fake_vehicles)
+print(broker.upsert_entities(fake_containers, os.environ.get("WASTECONTAINERS_CONTEXT")))
+print(broker.upsert_entities(fake_vehicles, os.environ.get("VEHICLEMODEL_CONTEXT")))
