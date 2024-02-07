@@ -5,6 +5,9 @@ from services.Optimization import Optimization
 import requests
 import json
 
+# Ngsi-ld broker client
+broker = Client()
+
 # Init flask server
 from flask import Flask, request
 from flask_cors import CORS
@@ -12,17 +15,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
-service = ""
-subservice = ""
-
-# Authenticate
-#auth = Auth()
-#token = auth.get_auth_token_subservice(service, subservice)
-token = ""
-
-# New Broker NGSI-LD connection
-broker = Client()
 
 # Serve frontend
 @app.route("/")
@@ -58,19 +50,11 @@ def optimization():
 # Data functions
 def get_all_WasteContainers():
     # Fetch all WasteContainer entities
-    limit = 400  # Entites per page (TODO: Implement pagination with response.headers["fiware-total-count"] & offset)
-    containers = broker.get_all_entities_by_type(
-        "WasteContainer", service, subservice, token, limit
-    ).json()
-
+    containers = broker.get_all_entities_by_type("WasteContainer").json()
     return containers
 
 
 def get_trucks():
     # Fetch all WasteContainer entities
-    limit = 10  # Entites per page (TODO: Implement pagination with response.headers["fiware-total-count"] & offset)
-    trucks = broker.get_all_entities_by_type(
-        "VehicleModel", service, subservice, token, limit
-    ).json()
-
+    trucks = broker.get_all_entities_by_type("VehicleModel").json()
     return trucks
