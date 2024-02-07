@@ -50,11 +50,13 @@ def optimization():
 # Data functions
 def get_all_WasteContainers():
     # Fetch all WasteContainer entities
-    containers = broker.get_all_entities_by_type("WasteContainer").json()
+    context = os.environ.get("WASTECONTAINERS_CONTEXT")
+    containers = broker.get_all_entities_by_type("WasteContainer", context).json()
     return containers
 
 
 def get_trucks():
     # Fetch all WasteContainer entities
-    trucks = broker.get_all_entities_by_type("VehicleModel").json()
+    context = os.environ.get("VEHICLEMODEL_CONTEXT")
+    trucks = broker.get_all_entities_by_type("VehicleModel", context).json()
     return trucks
