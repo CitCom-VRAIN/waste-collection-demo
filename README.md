@@ -2,7 +2,7 @@
 Waste collection optimization using Openroute service.
 
 ## 📦 Project setup
-Below are the basic instructions to deploy the minimum viable service. For a detailed deployment guide, check out our [documentation]. 
+Below are the basic instructions to deploy the minimum viable service. For a detailed deployment guide, check out our [documentation](https://citcom-vrain.github.io/services/waste_collection/). 
 
 Tested with Python `3.10.12` and Ubuntu 22.04. 
 
