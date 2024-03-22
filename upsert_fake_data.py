@@ -16,7 +16,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T11:01:53.655Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.378942489, 39.487800948], "type": "Point"},
+            "value": {"coordinates": [4.47356577103177, 51.02635663218616], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -30,7 +30,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T11:02:24.786Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.373669267, 39.487723755], "type": "Point"},
+            "value": {"coordinates": [4.482456198123897, 51.029270881136696], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -44,7 +44,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T12:01:51.946Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.388639182, 39.487771405], "type": "Point"},
+            "value": {"coordinates": [4.4759502000370786, 51.03607752313821], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -58,7 +58,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-01-14T09:18:12.958Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.3781, 39.51677], "type": "Point"},
+            "value": {"coordinates": [4.480675497054998, 51.04737975736167], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -72,7 +72,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T13:45:34.237Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.390743783, 39.470642589], "type": "Point"},
+            "value": {"coordinates": [4.452696273907791, 51.05759561937011], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -86,7 +86,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T12:01:09.553Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.392233976, 39.488288908], "type": "Point"},
+            "value": {"coordinates": [4.436509724025578, 51.03632203963316], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -100,7 +100,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-01-14T09:18:12.933Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.393471, 39.4363977], "type": "Point"},
+            "value": {"coordinates": [4.392698668162233, 51.031820019249736], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -114,7 +114,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-01-14T09:18:08.673Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.403533, 39.53746], "type": "Point"},
+            "value": {"coordinates": [4.37772789628272, 51.012467142902416], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -128,7 +128,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T11:02:27.904Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.39947, 39.477322], "type": "Point"},
+            "value": {"coordinates": [4.483362285903971, 50.99992744479022], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -142,7 +142,7 @@ fake_containers = [
         "location": {
             "observedAt": "2024-02-05T12:02:19.915Z",
             "type": "GeoProperty",
-            "value": {"coordinates": [-0.303486, 39.320902], "type": "Point"},
+            "value": {"coordinates": [4.532508033975845, 50.99882120234127], "type": "Point"},
         },
         "type": "WasteContainer",
     },
@@ -155,7 +155,7 @@ fake_vehicles = vehicles = [
             "observedAt": "2023-11-16T23:01:12.111Z",
             "type": "GeoProperty",
             "value": {
-                "coordinates": [-0.5045224463629362, 39.467567014494584],
+                "coordinates": [4.478871556957386, 51.00371825111759],
                 "type": "Point",
             },
         },
