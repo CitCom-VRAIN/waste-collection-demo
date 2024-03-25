@@ -1,12 +1,10 @@
 import os
-from lib.ngsildclient.Auth import Auth
 from lib.ngsildclient.Client import Client
 from services.Optimization import Optimization
-import requests
 import json
 
 # Ngsi-ld broker client
-broker = Client()
+client = Client()
 
 # Init flask server
 from flask import Flask, request
@@ -51,12 +49,12 @@ def optimization():
 def get_all_WasteContainers():
     # Fetch all WasteContainer entities
     context = os.environ.get("WASTECONTAINERS_CONTEXT")
-    containers = broker.get_all_entities_by_type("WasteContainer", context).json()
+    containers = client.get_all_entities_by_type("WasteContainer", context).json()
     return containers
 
 
 def get_trucks():
     # Fetch all WasteContainer entities
     context = os.environ.get("VEHICLEMODEL_CONTEXT")
-    trucks = broker.get_all_entities_by_type("VehicleModel", context).json()
+    trucks = client.get_all_entities_by_type("VehicleModel", context).json()
     return trucks
