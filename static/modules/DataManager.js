@@ -34,9 +34,11 @@ export class DataManager {
         this.filteredWasteContainers = this.wasteContainers;
 
         // Create Vehicle objects
-        vehiclesData.forEach(vehicle => {
-            this.vehicles.push(new Vehicle(vehicle.id, { lng: vehicle.location.value.coordinates[0], lat: vehicle.location.value.coordinates[1] }, vehicle.brandName, vehicle.fuelType, vehicle.cargoVolume))
-        });
+        if (vehiclesData && vehiclesData.length > 0) {
+            vehiclesData.forEach(vehicle => {
+                this.vehicles.push(new Vehicle(vehicle.id, { lng: vehicle.location.value.coordinates[0], lat: vehicle.location.value.coordinates[1] }, vehicle.brandName, vehicle.fuelType, vehicle.cargoVolume))
+            });
+        }
     }
 
     filter(fillingLevel) {
