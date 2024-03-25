@@ -1,5 +1,6 @@
 import os
 from lib.ngsildclient.Client import Client
+from lib.ngsildclient.Authv2 import Authv2
 from services.Optimization import Optimization
 import json
 
@@ -47,9 +48,17 @@ def optimization():
 
 # Data functions
 def get_all_WasteContainers():
+    # Define service & subservice
+    service = "tef_vlci"
+    subservice = "/residuos_contenedores_vlc"
+
+    # Authenticate
+    auth = Authv2()
+    token = auth.get_auth_token_subservice(service, subservice)
+
     # Fetch all WasteContainer entities
     context = os.environ.get("WASTECONTAINERS_CONTEXT")
-    containers = client.get_all_entities_by_type("WasteContainer", context).json()
+    containers = client.get_all_entities_by_type("WasteContainer", context, 100, 0, service, subservice, token).json()
     return containers
 
 
