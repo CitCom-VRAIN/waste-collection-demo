@@ -1,8 +1,8 @@
 # Waste Collection Demo
-Waste collection optimization using Openroute service.
+Waste collection optimization using Openroute service. For a detailed guide, check out our [documentation](https://citcom-vrain.github.io/services/waste_collection/)
 
 ## 📦 Project setup
-Below are the basic instructions to deploy the minimum viable service. For a detailed deployment guide, check out our [documentation](https://citcom-vrain.github.io/services/waste_collection/). 
+Below are the basic instructions to run the minimum viable service. 
 
 Tested with Python `3.10.12` and Ubuntu 22.04. 
 
@@ -11,51 +11,52 @@ Tested with Python `3.10.12` and Ubuntu 22.04.
 git clone https://github.com/CitCom-VRAIN/waste-collection-demo.git && cd waste-collection-demo
 ```
 
-2. Init git submodules with the following command. This will clone and install a dead simple [ngsi-ld client library](https://github.com/CitCom-VRAIN/ngsild-client) in `lib` folder.
-```bash
-git submodule init && git submodule update
-```
-
-3. Next, create and run the Orion-LD Docker image. It is necessary to have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose) installed. This will set-up an Orion-LD broker with a MongoDB database. Check out the [`docker-compose.yaml`](https://github.com/CitCom-VRAIN/waste-collection-demo/blob/mvs-orionld/docker-compose.yaml) file for more details.
-```bash
-docker compose up
-```
-
-4. Create and activate a Python virtual environment:
+2. Create and activate a Python virtual environment:
 ```bash
 python3 -m venv ./venv && source ./venv/bin/activate
 ```
 
-5. Install all requirements:
+3. Install all requirements:
 ```bash
 pip install -r requirements.txt
 ```
 
-6. Create an `.env` file using `.env.example` as a guide: 
+4. Create an `.env` file using `.env.example` as a guide: 
 ```bash
 cp .env.example .env
 ```
 
-7. Then edit the `.env` file and replace the `OPENROUTESERVICE_API_KEY` value with your own Openroute service API key.
+5. Then edit the `.env` file and replace the `OPENROUTESERVICE_API_KEY` value with your own Openroute service API key.
 ```bash
-PROTOCOL="http"
-ENDPOINT_CB="127.0.0.1:1026"
 OPENROUTESERVICE_API_KEY="Replace this string with your Openroute API key"
-WASTECONTAINERS_CONTEXT="https://raw.githubusercontent.com/smart-data-models/dataModel.WasteManagement/master/context.jsonld"
-VEHICLEMODEL_CONTEXT="https://raw.githubusercontent.com/smart-data-models/dataModel.Transportation/master/context.jsonld"
+KEYCLOAK_URL="http://keycloak-consumer.63.33.94.64.nip.io"
+CREDENTIAL_CONFIGURATION_I="operator-credential"
 ```
 
-8. After editing the file and saving it, read the .env file:
+6. After editing the file and saving it, read the .env file:
 ```bash
 source .env
 ```  
 
-9. Populate the context broker with some fake data by running the following command. This will create some `WasteContainer` and `VehicleModel` entities in the broker:
-```bash
-python3 upsert_fake_data.py
-```
-
-10. Finally, start the server and open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser:
+7. Finally, start the server and open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser:
 ```bash
 flask --app server run
+```
+
+## Docker
+```bash
+docker build -t joancipria/waste-collection-demo:latest .
+
+docker push joancipria/waste-collection-demo:latest
+
+kubectl create secret generic wallet-identity-secret \
+    --from-file=did.json=wallet-identity/did.json \
+    --from-file=private-key.pem=wallet-identity/private-key.pem \
+    -n consumer
+
+kubectl create secret generic ors-api-key --from-literal=OPENROUTESERVICE_API_KEY=5b3ce3597851110001cf62487c1cebfad2324c61823ac5e4fe9be9b1 -n consumer
+
+kubectl apply -f flask-app.yaml
+
+kubectl rollout restart deployment waste-collection-demo -n consumer
 ```

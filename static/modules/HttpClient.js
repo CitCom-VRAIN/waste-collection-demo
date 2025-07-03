@@ -1,12 +1,11 @@
 export class HttpClient {
-    #serverURL = "http://127.0.0.1:5000/";
     #networkTimeOut = 7000; // 7s to abort
 
     async get(path, params) {
 
-        // Build URL
-        const url = new URL(this.#serverURL);
-        url.pathname = path;
+        // Build URL using current origin
+        const baseURL = window.location.origin;
+        const url = new URL(path, baseURL);
 
         const searchParams = new URLSearchParams(params);
 
