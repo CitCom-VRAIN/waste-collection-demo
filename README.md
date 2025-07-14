@@ -43,20 +43,37 @@ source .env
 flask --app server run
 ```
 
-## Docker
+## Docker build
 ```bash
 docker build -t joancipria/waste-collection-demo:latest .
 
 docker push joancipria/waste-collection-demo:latest
-
+```
+## DS deployment
+```bash
+# Create wallet identity secret
 kubectl create secret generic wallet-identity-secret \
     --from-file=did.json=wallet-identity/did.json \
     --from-file=private-key.pem=wallet-identity/private-key.pem \
     -n consumer
 
+# Create ORS API key secret
 kubectl create secret generic ors-api-key --from-literal=OPENROUTESERVICE_API_KEY=5b3ce3597851110001cf62487c1cebfad2324c61823ac5e4fe9be9b1 -n consumer
 
+# Create keycloak login secret
+kubectl create secret generic keycloak-credentials \
+    --from-literal=KEYCLOAK_USER='test-user' \
+    --from-literal=KEYCLOAK_PASSWORD='test' \
+    --from-literal=KEYCLOAK_CLIENT_ID='admin-cli' \
+    -n consumer
+
+# Check
+kubectl get secrets -n <TU_NAMESPACE>
+kubectl describe secret wallet-identity-secret -n <TU_NAMESPACE>
+
+# Deploy
 kubectl apply -f flask-app.yaml
 
+# Restart if needed
 kubectl rollout restart deployment waste-collection-demo -n consumer
 ```

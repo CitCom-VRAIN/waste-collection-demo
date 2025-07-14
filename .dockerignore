@@ -1,0 +1,5 @@
+.env
+wallet-identity/
+__pycache__/
+*.pyc
+.git
